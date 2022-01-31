@@ -1,0 +1,18 @@
+<div class="footer" [hidden]="(currentRoute !== '/in-progress' && currentRoute !== '/checklists' && currentRoute !== '/customers' && currentRoute !== '/settings')">
+  <div class="footer-button" [ngClass]="{'active': currentRoute === '/in-progress'}" (click)="goToRoute('in-progress')">
+    <img [hidden]="currentRoute !== '/in-progress'" src="./../../../assets/imgs/in-progress-solid.svg" />
+    <img [hidden]="currentRoute === '/in-progress'" src="./../../../assets/imgs/in-progress.svg" />
+  </div>
+  <div class="footer-button" [ngClass]="{'active': currentRoute === '/checklists'}" (click)="goToRoute('checklists')">
+    <img [hidden]="currentRoute !== '/checklists'"src="./../../../assets/imgs/checklists-solid.svg" />
+    <img [hidden]="currentRoute === '/checklists'" src="./../../../assets/imgs/checklists.svg" />
+  </div>
+  <div *authCheck class="footer-button" [ngClass]="{'active': currentRoute === '/customers'}" (click)="goToRoute('customers')">
+    <img [hidden]="currentRoute !== '/customers'" src="./../../../assets/imgs/customers-solid.svg" />
+    <img [hidden]="currentRoute === '/customers'" src="./../../../assets/imgs/customers.svg" />
+  </div>
+  <div class="footer-button" [ngClass]="{'active': currentRoute === '/settings'}" (click)="goToRoute('settings')">
+    <img [hidden]="currentRoute !== '/settings'" src="./../../../assets/imgs/settings-solid.svg" />
+    <img [hidden]="currentRoute === '/settings'" src="./../../../assets/imgs/settings.svg" />
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="wrapper" *ngIf="checklist !== null">
+
+    <div class="header">
+        <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/back-arrow.svg" /></div>
+      <div class="push"></div>
+      <button class="header-button secondary" (click)="editTasks()">EDIT TASKS</button>
+      <button class="header-button" *ngIf="checklist !== null" (click)="edit()" [disabled]="checklistNameRef.invalid || checklistCategoryRef.invalid">SAVE</button>
+    </div>
+  
+    <div class="content">
+      <h1>
+        <div>EDIT CHECKLIST DETAILS</div>
+      </h1>
+  
+        <!-- Checklist Category -->
+        <label>Checklist Template Category</label>
+        <div class="input-wrap">
+          <input 
+            type="text" 
+            [ngModel]="(checklistQuery | async)?.category"
+            (ngModelChange)="checklist.category = $event"
+            placeholder="Checklist Category" 
+            name="checklistCategory" 
+            #checklistCategoryRef="ngModel"
+            required
+          />
+          <img *ngIf="checklistCategoryRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+          <small *ngIf="checklistCategoryRef.invalid && checklistCategoryRef.touched">Required</small>
+        </div>
+
+      <!-- Checklist Name -->
+      <label>Checklist Template Name</label>
+      <div class="input-wrap">
+        <input 
+          type="text" 
+          [ngModel]="(checklistQuery | async)?.name"
+          (ngModelChange)="checklist.name = $event"
+          placeholder="Checklist Name" 
+          name="checklistName" 
+          #checklistNameRef="ngModel"
+          required
+        />
+        <img *ngIf="checklistNameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+        <small *ngIf="checklistNameRef.invalid && checklistNameRef.touched">Required</small>
+      </div>
+
+  
+    </div>
+  
+  </div>
+  

@@ -1,0 +1,77 @@
+<div class="wrapper">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+      <div class="push"></div>
+      <ng-container *ngIf="csvData.length > 0">
+          <button class="header-button secondary" (click)="revert()">CANCEL</button>
+          <button *ngIf="csvData.length <= 500" class="header-button" (click)="import()">IMPORT</button>
+      </ng-container>
+  </div>
+
+  <div class="content">
+    <h1>CSV CUSTOMER IMPORT</h1>
+
+    <ng-container *ngIf="csvData.length == 0">
+    <div class="info-message">
+      <p>Click on the <strong>Choose File</strong> button below to choose your csv (Max 500 customers per import). The file needs to have these 3 columns with no header row required: <br><br>
+        Name, Email, Address<br><br>
+
+        <strong>Example:</strong><br>
+        <small>
+        Sarah Checklister, sarah.checklister@email.com, 123 Address St<br>
+        Very Cool Business, verycool@business.com, 456 Business Lane<br>
+        Skydiving Central, goskydiving@gmail.com, 678 Excitement Ave<br>
+        </small>
+
+    </div>
+
+    <input class="import-button" size="30px" type="file" (change)="selectFile($event)"/>
+
+  </ng-container>
+
+  <ng-container *ngIf="csvData.length > 0 && csvData.length <= 500 && !hasError">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of csvData">
+          <td>
+            {{ row.name }}
+          </td>
+          <td>
+            {{ row.email }}
+          </td>
+          <td>
+            {{ row.address }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </ng-container>
+
+  <ng-container *ngIf="csvData.length > 500 && !hasError">
+   
+      <div class="info-message">
+          <p>Please limit the import to 500 customers at a time. Check for empty rows after 500 if this error persists</p>
+        </div>
+
+  </ng-container>
+
+  <ng-container *ngIf="hasError">
+   
+    <div class="info-message">
+        <p>{{ error }}</p>
+      </div>
+
+</ng-container>
+
+  </div>
+
+</div>

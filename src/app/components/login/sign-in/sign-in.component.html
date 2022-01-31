@@ -1,0 +1,38 @@
+<div class="wrapper">
+
+    <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/back-arrow.svg" /></div>
+      <div class="push"></div>
+      <button class="header-button secondary" (click)="resetPassword()">RESET PASSWORD</button>
+      <button class="header-button" (click)="signIn()" [disabled]="signInForm.invalid">SIGN IN</button>
+    </div>
+  
+    <div class="content">
+  
+        <h2>{{ errorMessage === null ? 'Welcome Back!' : errorMessage }}</h2>
+
+        <div ngForm #signInForm="ngForm">
+
+          <!-- Password -->
+          <label>Password</label>
+          <div class="input-wrap">
+            <input 
+              type="password" 
+              [(ngModel)]="password"
+              placeholder="Enter Your Password" 
+              name="password" 
+              #passwordRef="ngModel"
+              required
+              minlength="8"
+            />
+            <img *ngIf="passwordRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+            <small *ngIf="passwordRef.invalid && passwordRef.touched">Must be min 8 characters long</small>
+          </div>
+
+        </div>
+  
+    </div>
+  
+  </div>
+  
+  <!-- TODO: Look into sparkpost for handling emails - free up to 15,000/month https://www.sparkpost.com/resources/email-explained/transactional-email/ -->

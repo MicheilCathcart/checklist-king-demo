@@ -1,0 +1,39 @@
+<div class="wrapper">
+
+  <div class="header">
+    <app-team-name></app-team-name>
+    <div class="push"></div>
+    <button *authCheck class="header-button" (click)="createChecklist()">+ NEW TEMPLATE</button>
+  </div>
+
+  <div class="content">
+    <h1>
+      <div>CHECKLISTS</div>
+      <small>Start a reusable checklist for a customer</small>
+    </h1>
+    
+
+    <app-loading-image *ngIf="!checklists"></app-loading-image>
+
+    <ng-container *ngIf="checklists">
+
+      <div class="link-group" *ngFor="let group of checklists">
+
+        <div class="link-header">{{ group[0].category }}</div>
+        <div class="link" (click)="initialiseChecklist(checklist)" *ngFor="let checklist of group">{{ checklist.name }}</div>
+      </div>
+
+      <div class="info-message" *ngIf="checklists.length === 0">
+        <p>Create your first reusable checklist template by clicking the <br><strong>+ NEW TEMPLATE</strong> button above.</p>
+      </div>
+
+      <div class="info-message" *ngIf="checklists.length === 1">
+        <p>Click on the <strong>checklist above</strong> to start it for a customer. Checklists are reusable, so you can
+          use it for a customer as many times as you like!</p>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</div>

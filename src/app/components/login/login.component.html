@@ -1,0 +1,36 @@
+<div class="wrapper">
+
+    <div class="header">
+      <img class="header-logo" src="./../../../assets/imgs/checklist-king-icon.svg" />
+      <div class="push"></div>
+      <button class="header-button" (click)="checkEmail()" [disabled]="signInForm.invalid">NEXT</button>
+    </div>
+  
+    <div class="content">
+  
+        <img class="logo-portrait" src="./assets/imgs/checklist-king-portrait.svg">
+
+        <form #signInForm="ngForm" autocomplete="off">
+
+          <!-- Email -->
+          <label>Email</label>
+          <div class="input-wrap">
+            <input 
+              type="email" 
+              [(ngModel)]="email"
+              email
+              placeholder="Enter Your Email" 
+              name="email" 
+              #emailRef="ngModel"
+            />
+            <img *ngIf="emailRef.valid && emailRef.touched" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+            <small *ngIf="emailRef.invalid && emailRef.touched">Please enter a valid email address</small>
+          </div>
+
+      </form>
+  
+      <router-outlet></router-outlet>
+    </div>
+  
+  </div>
+  

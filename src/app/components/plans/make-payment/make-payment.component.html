@@ -1,0 +1,6 @@
+<ng-container *ngIf="oldUserCount !== userCount">
+  <button class="header-button" (click)="handlePayment()">
+      <span *ngIf="subscribed"><strong>UPGRADE &nbsp;</strong> {{ userCount }} Users</span>
+      <span *ngIf="!subscribed">Sign Up </span> &nbsp; - ${{ amount }}/Month
+  </button>
+</ng-container>

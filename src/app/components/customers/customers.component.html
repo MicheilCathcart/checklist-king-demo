@@ -1,0 +1,35 @@
+<div class="wrapper">
+
+  <div class="header">
+    <app-team-name></app-team-name>
+    <div class="push"></div>
+    <button class="header-button secondary" (click)="import()">CSV IMPORT</button>
+    <button class="header-button" (click)="create()">+ NEW</button>
+  </div>
+
+  <div class="content">
+    <h1>
+      <div>CUSTOMERS</div>
+      <small>Add, edit and delete customers</small>
+    </h1>
+
+    <app-loading-image *ngIf="!customers"></app-loading-image>
+
+    <ng-container *ngIf="customers">
+
+      <div class="link-group" *ngFor="let group of customers">
+
+        <div class="link-header">{{ group[0].firstChar }}</div>
+        <div class="link" (click)="initialiseCustomer(customer)" *ngFor="let customer of group">{{ customer.name }}</div>
+      </div>
+
+      <div class="info-message" *ngIf="customers.length === 1">
+        <p>Add new customers using the <strong>+ NEW</strong> button or select <strong>IMPORT</strong> to import
+          multiple customers using a csv list</p>
+      </div>
+
+    </ng-container>
+
+  </div>
+
+</div>

@@ -1,0 +1,72 @@
+<div class="loader" [ngClass]="{'loading': !(userQuery | async)?.name }"></div>
+<div class="wrapper">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+    <div class="push"></div>
+    <button class="header-button secondary" *ngIf="(userQuery | async)?.role !== 'Owner'" (click)="resendInvite()">RESEND INVITE</button>
+    <button class="header-button secondary" (click)="delete()"><img src="./../../../assets/imgs/delete.svg" /></button>
+    <button class="header-button" (click)="edit()" [disabled]="nameRef?.invalid || emailRef?.invalid">EDIT {{ (userQuery | async)?.role |  uppercase }}</button>
+  </div>
+
+  <div class="content">
+    <h1>EDIT {{ (userQuery | async)?.role |  uppercase }}</h1>
+
+    <!-- Name -->
+    <label>Name</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [ngModel]="(userQuery | async)?.name"
+        (ngModelChange)="user.name = $event"
+        placeholder="Name" 
+        name="name" 
+        #nameRef="ngModel"
+        required
+      />
+      <img *ngIf="nameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="nameRef.invalid && nameRef.touched">Required</small>
+    </div>
+
+    <!-- Email -->
+    <label>Email</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [ngModel]="(userQuery | async)?.email"
+        (ngModelChange)="user.email = $event"
+        placeholder="Email" 
+        name="email" 
+        #emailRef="ngModel"
+        required
+      />
+      <img *ngIf="emailRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="emailRef.invalid && emailRef.touched">Required</small>
+    </div>
+
+    <!-- Role -->
+    <div *ngIf="(userQuery | async)?.role !== 'Owner'">
+    <label>Role</label>
+    <div class="input-wrap">
+      <select
+          [ngModel]="(userQuery | async)?.role" 
+          (ngModelChange)="user.role = $event"
+          name="role" 
+          placeholder="Role" 
+          #roleRef="ngModel"
+          required>
+          <option [value]="'user'">User</option>
+          <option [value]="'manager'">Manager</option>
+        </select>
+      <img *ngIf="roleRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="roleRef.invalid && roleRef.touched">Required</small>
+    </div>
+    </div>
+
+    <div class="info-message">
+      <p>Managers have full access like owners while users can only mark off checklists and send reports.</p>
+    </div>
+
+  </div>
+
+</div>

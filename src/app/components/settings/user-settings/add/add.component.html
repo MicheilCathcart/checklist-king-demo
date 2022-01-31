@@ -1,0 +1,64 @@
+<div class="wrapper">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+    <div class="push"></div>
+    <button class="header-button" (click)="add()" [disabled]="nameRef.invalid || emailRef.invalid || roleRef.invalid">INVITE</button>
+  </div>
+
+  <div class="content">
+    <h1>INVITE USER</h1>
+
+    <!-- Name -->
+    <label>Name</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="name"
+        placeholder="Name" 
+        name="name" 
+        #nameRef="ngModel"
+        required
+      />
+      <img *ngIf="nameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="nameRef.invalid && nameRef.touched">Required</small>
+    </div>
+
+    <!-- Email -->
+    <label>Email</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="email"
+        placeholder="Email" 
+        name="email" 
+        #emailRef="ngModel"
+        required
+      />
+      <img *ngIf="emailRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="emailRef.invalid && emailRef.touched">Required</small>
+    </div>
+
+    <!-- Role -->
+    <label>Role</label>
+    <div class="input-wrap">
+      <select
+          [(ngModel)]="role" 
+          name="role" 
+          placeholder="Role" 
+        #roleRef="ngModel"
+          required>
+          <option [value]="'user'">User</option>
+          <option [value]="'manager'">Manager</option>
+        </select>
+      <img *ngIf="roleRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="roleRef.invalid && roleRef.touched">Required</small>
+    </div>
+
+    <div class="info-message">
+      <p>Managers have full access while users can only mark off checklists and send reports.</p>
+    </div>
+
+  </div>
+
+</div>

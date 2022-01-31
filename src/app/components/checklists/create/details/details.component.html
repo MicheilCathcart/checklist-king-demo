@@ -1,0 +1,53 @@
+<div class="wrapper">
+
+    <form #createDetailsForm="ngForm" autocomplete="off">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+    <div class="push"></div>
+    <button type="submit" class="header-button" (click)="addTasks()" [disabled]="checklistNameRef.invalid || checklistCategoryRef.invalid">ADD TASKS</button>
+  </div>
+
+  <div class="content">
+      <h1>
+        <div>CHECKLIST TEMPLATE</div>
+        <small>Create a reusable checklist to use for your customers.</small>
+      </h1>
+
+          <!-- Checklist Category -->
+    <label>Checklist Template Category</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="createService.checklistCategory"
+        placeholder="Checklist Category" 
+        name="checklistCategory" 
+        #checklistCategoryRef="ngModel"
+        required
+      />
+      <img *ngIf="checklistCategoryRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="checklistCategoryRef.invalid && checklistCategoryRef.touched">Required</small>
+    </div>
+
+    <!-- Checklist Name -->
+    <label>Checklist Template Name</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="createService.checklistName"
+        placeholder="Checklist Name" 
+        name="checklistName" 
+        #checklistNameRef="ngModel"
+        required
+      />
+      <img *ngIf="checklistNameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="checklistNameRef.invalid && checklistNameRef.touched">Required</small>
+    </div>
+
+
+
+  </div>
+
+</form>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="wrapper">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/back-arrow.svg" /></div>
+    <div class="push"></div>
+    <button *authCheck class="header-button secondary" (click)="deleteChecklist()"><img src="./../../../assets/imgs/delete.svg" /></button>
+    <button *authCheck class="header-button secondary" (click)="editChecklist()"><img src="./../../../assets/imgs/edit.svg" /></button>
+    <button class="header-button" [disabled]="this.checklistService.selected.clientName === null" (click)="startChecklist()">START</button>
+  </div>
+
+  <div class="content">
+    <h1>
+      <div>{{ checklistService.selected?.name }}</div>
+      <small>Select a customer you would like to start the checklist for</small>
+    </h1>
+
+    <div class="link-group" *ngFor="let group of customers.query | async">
+    
+      <div class="link-header">{{ group[0].firstChar }}</div>
+      <div class="link checkbox" (click)="selectCustomer(customer)" *ngFor="let customer of group" [ngClass]="{ 'checked': isSelected(customer) }">{{ customer.name }}</div>
+    </div>
+
+    <div class="info-message" *ngIf="(customers.query | async)?.length === 1">
+      <p>Select the customer you would like to start the checklist for. <span *authCheck>You can add new customers in the <strong>customers</strong> tab from the home screen</span></p>
+    </div>
+
+  </div>
+
+</div>
+  

@@ -1,0 +1,65 @@
+<div class="loader" [ngClass]="{'loading': !(customerQuery | async)?.name }"></div>
+<div class="wrapper">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+    <div class="push"></div>
+    <button class="header-button secondary" (click)="delete()"><img src="./../../../assets/imgs/delete.svg" /></button>
+    <button class="header-button" (click)="edit()" [disabled]="nameRef.invalid || emailRef.invalid">SAVE</button>
+  </div>
+
+  <div class="content">
+    <h1>EDIT CUSTOMER</h1>
+
+    <!-- Name -->
+    <label>Name</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [ngModel]="(customerQuery | async)?.name"
+        (ngModelChange)="customer.name = $event"
+        placeholder="Name" 
+        name="name" 
+        #nameRef="ngModel"
+        required
+      />
+      <img *ngIf="nameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="nameRef.invalid && nameRef.touched">Required</small>
+    </div>
+
+    <!-- Email -->
+    <label>Email</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [ngModel]="(customerQuery | async)?.email"
+        (ngModelChange)="customer.email = $event"
+        placeholder="Email" 
+        name="email" 
+        #emailRef="ngModel"
+        required
+      />
+      <img *ngIf="emailRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="emailRef.invalid && emailRef.touched">Required</small>
+    </div>
+
+    <!-- Address -->
+
+    <label>Address</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [ngModel]="(customerQuery | async)?.address"
+        (ngModelChange)="customer.address = $event"
+        placeholder="Address" 
+        name="address" 
+        #addressRef="ngModel"
+        required
+      />
+    </div>
+
+
+
+  </div>
+
+</div>

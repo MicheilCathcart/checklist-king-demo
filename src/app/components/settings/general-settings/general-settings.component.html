@@ -1,0 +1,180 @@
+<div class="wrapper" *ngIf="team?.name">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+    <div class="push"></div>
+    <button 
+    class="header-button" 
+    (click)="update()" 
+    *ngIf="team !== null" 
+    [disabled]="form?.invalid">UPDATE</button>
+  </div>
+
+  <div class="content">
+
+    <app-loading-image *ngIf="!team"></app-loading-image>
+
+    <ng-container *ngIf="team">
+
+    <h1>
+      <div>GENERAL SETTINGS</div>
+      <small>Team and communication settings</small>
+    </h1>
+
+    <form #form="ngForm">
+
+    <h3>Team</h3>
+
+    <!-- Team Name -->
+    <label>Team Name</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.name"
+        placeholder="Team Name" 
+        name="teamName" 
+        #teamNameRef="ngModel"
+        required
+      />
+      <img *ngIf="teamNameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="teamNameRef.invalid && teamNameRef.touched">Required</small>
+    </div>
+
+    <h3>Communication</h3>
+
+    <!-- Team Reply Email -->
+
+    <label>Your Reply Email</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.replyToEmail"
+        placeholder="Reply Email" 
+        name="replyEmail" 
+      />
+    </div>
+
+    <!-- Team Management Email -->
+
+    <label>Your Report Email</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.onCompleteEmail"
+        placeholder="Report Email" 
+        name="teamEmail" 
+      />
+    </div>
+
+    <!-- Email Header -->
+
+    <label>Email Header (HTML)</label>
+    <div class="input-wrap">
+      <div class="placeholder" *ngIf="team.emailHeader?.length === 0">Email Header</div>
+      <div contenteditable="true" 
+            class="step-input" 
+            style="max-width: 100%"
+            name="team.emailHeader"
+            [(ngModel)]="team.emailHeader"
+      ></div>
+    </div>
+
+    <label>Email Footer (HTML)</label>
+    <div class="input-wrap">
+      <div class="placeholder" *ngIf="team.emailFooter?.length === 0">Email Footer</div>
+      <div contenteditable="true" 
+            class="step-input" 
+            name="team.emailFooter"
+            style="max-width: 100%"
+            [(ngModel)]="team.emailFooter"
+      ></div>
+    </div>
+
+    <label>Logo (jpeg, max 50kb)</label>
+    <img class="stored-logo" *ngIf="team.logoPath" [src]="team.logoPath" />
+    <div class="input-wrap">
+      <input type='file' (change)="fileChanged($event)">
+    </div>
+
+
+    <h3>Email CSS Styles</h3>
+
+    <!-- Email colour -->
+
+    <label>Email Highlight Colour (HEX code)</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.emailHighlightColour"
+        placeholder="Email Highlight Colour" 
+        name="emailHighlightColour" 
+      />
+    </div>
+
+    <!-- Email tick colour -->
+
+    <label>Email Completed Text Colour (HEX code)</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.emailTickColour"
+        placeholder="Email Tick Colour" 
+        name="emailTickColour" 
+      />
+    </div>
+
+    <!-- Email Text Colour -->
+
+    <label>Email Text Colour (HEX code)</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.emailTextColour"
+        placeholder="Text Colour" 
+        name="emailTextColour" 
+      />
+    </div>
+
+    <!-- Email Heading Text Colour -->
+
+    <label>Email Heading Text Colour (HEX code)</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.emailHeadingTextColour"
+        placeholder="Email Heading Text Colour" 
+        name="emailHeadingTextColour" 
+      />
+    </div>
+
+    <!-- Email Heading Background Colour -->
+
+    <label>Email Heading Background Colour (HEX code)</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.emailHeadingBackgroundColour"
+        placeholder="Email Heading Background Colour" 
+        name="emailHeadingBackgroundColour" 
+      />
+    </div>
+
+    <!-- Email Body Background Colour -->
+
+    <label>Email Body Background Colour (HEX code)</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="team.emailBodyBackgroundColour"
+        placeholder="Email Body Background Colour" 
+        name="emailBodyBackgroundColour" 
+      />
+    </div>
+
+    </form>
+
+    </ng-container>
+
+  </div>
+
+</div>

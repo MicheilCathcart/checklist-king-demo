@@ -1,0 +1,52 @@
+<div class="wrapper" *ngIf="team && user">
+
+  <div class="header">
+    <app-team-name></app-team-name>
+    <div class="push"></div>
+    <button class="header-button" (click)="join()" [disabled]="signInForm.invalid">JOIN</button>
+  </div>
+
+  <div class="content">
+
+      <h2>Hi {{ (userQuery | async)?.name }}, choose a password to join {{ (teamQuery | async)?.name }}</h2>
+
+      <div ngForm #signInForm="ngForm">
+
+        <!-- Password -->
+        <label>Choose Password</label>
+        <div class="input-wrap">
+          <input 
+            type="password" 
+            [(ngModel)]="password"
+            placeholder="Password, 8 characters or more" 
+            name="password" 
+            #passwordRef="ngModel"
+            required
+            minlength="8"
+            validateEqual="confirmPassword" reverse="true"
+          />
+          <img *ngIf="passwordRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+          <small *ngIf="passwordRef.invalid && passwordRef.touched">Must be min 8 characters long</small>
+        </div>
+
+        <!-- Confirm Password -->
+        <label>Confirm Password</label>
+        <div class="input-wrap">
+          <input 
+            type="password" 
+            [(ngModel)]="confirmPassword"
+            placeholder="Confirm Password" 
+            name="confirmPassword" 
+            #confirmPasswordRef="ngModel"
+            required
+            validateEqual="password"
+          />
+          <img *ngIf="confirmPasswordRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+          <small *ngIf="confirmPasswordRef.invalid && confirmPasswordRef.touched">Password mismatch</small>
+        </div>
+
+      </div>
+
+  </div>
+
+</div>

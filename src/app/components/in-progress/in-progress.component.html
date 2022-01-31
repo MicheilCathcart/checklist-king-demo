@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+  <div class="header">
+    <app-team-name></app-team-name>
+  </div>
+
+  <div class="content">
+    <h1>
+      <div>IN PROGRESS</div>
+      <small>Select an existing checklist to continue it</small>
+    </h1>
+
+    <app-loading-image *ngIf="!(inProgressCollection.query | async)"></app-loading-image>
+
+    <div class="link-group" *ngFor="let ownedBy of inProgressCollection.query | async; let i = index">
+      <div class="link-header">{{ i == 0 ? 'Mine' : 'Shared'}}</div>
+      <div class="link" (click)="gotToChecklist(checklist.id)" *ngFor="let checklist of ownedBy">
+        <div class="bold-title">{{ checklist.clientName }} - <small>{{ checklist.date | date: 'dd MMM yyyy'}}</small></div> 
+        {{ checklist.name }} 
+        </div>
+      </div>
+
+      <div class="info-message" *ngIf="(inProgressCollection.query | async)?.length === 1">
+        <p>Select the existing checklist to continue it</p>
+      </div>
+
+      <div class="info-message" *ngIf="(inProgressCollection.query | async)?.length === 0">
+        <p>Checklists will appear here when they are in progress. Start a new checklist under the <strong>Checklists</strong> tab</p>
+      </div>
+
+  </div>
+
+</div>

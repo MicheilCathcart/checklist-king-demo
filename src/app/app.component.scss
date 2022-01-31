@@ -1,0 +1,14 @@
+:host {
+    .outer-wrap {
+        display: flex;
+    background-image: linear-gradient(-135deg, #0081DE 0%, #005796 100%);
+    flex-direction: column;
+    max-height: 100%;
+    height: 100%;
+    max-width: 768px;
+    max-height: 1024px;
+    margin: 0 auto;
+    overflow: auto;
+    }
+    
+}

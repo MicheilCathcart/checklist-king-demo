@@ -1,0 +1,74 @@
+<div class="wrapper">
+
+    <div class="header">
+        <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/back-arrow.svg" /></div>
+      <div class="push"></div>
+      <button class="header-button" (click)="create()">CREATE</button>
+    </div>
+  
+    <div class="content">
+      <h1>
+        <div>{{ createService.checklistName }}</div>
+        <small>Add tasks below for your checklist template.</small>
+      </h1>
+
+      <div class="add-task-group" (click)="addGroup()"><img src="./../../../assets/imgs/add-area-icon.svg"> ADD NEW {{ industryTerms.industry.taskGroupName | uppercase }}</div>
+      
+      <div class="tasks-group-wrap" *ngFor="let group of createService.checklistTasks; let i = index">
+
+        <!-- Tasks Group -->
+        <div class="task-wrap group">
+        <input class="task-group-input" 
+          autofocus
+          type="text"
+          [(ngModel)]="group.groupName"
+          placeholder="{{ industryTerms.industry.taskGroupName }} NAME"
+          (keydown.enter)="addTask(group, $event);"
+          (focus)="onFocusSetPosition(i, -1)"
+          [attr.data-group-index]="i"
+          [attr.data-task-index]="-1"
+          #taskElement
+        />
+        <div class="push"></div>
+          <img class="delete-group" (click)="deleteGroup(i)" [hidden]="!(focussedTask.group === i && focussedTask.task === -1)"  src="./../../../assets/imgs/exit-cross.svg" />
+        </div>
+
+        <!-- Tasks -->
+        <div class="task-wrap" *ngFor="let task of group.tasks; let a = index">
+          <div class="numbering">{{ a + 1 }}</div>
+          <div class="placeholder" [hidden]="task?.description.length > 0">Task {{ a + 1 }}</div>
+          <div contenteditable="true" 
+            name="editableTask"
+            class="step-input" 
+            (keydown.enter)="addTask(group, $event)"
+            (keydown.delete)="deleteTask(group, task, a, true)"
+            (keydown.backspace)="deleteTask(group, task, a, true)"
+            [(ngModel)]="task.description"
+            (focus)="onFocusSetPosition(i, a, taskElement)"
+            [attr.data-group-index]="i"
+            [attr.data-task-index]="a"
+            #taskElement
+            #taskElementRef="ngModel"
+          >
+          </div>
+          <div class="push"></div>
+          <img (click)="deleteTask(group, task, a, false)" [hidden]="!(focussedTask.group === i && focussedTask.task === a)" src="./../../../assets/imgs/exit-cross.svg" />
+          <!-- [hidden]="!(focussedTask.group === i && focussedTask.task === -1)" -->
+      </div>
+
+      <!-- Task group controls-->
+      <div class="add-tasks-wrap" [hidden]="!(focussedTask.group === i)">
+        <div class="add-task-button" (click)="addTask(group, $event)">
+          <img src="./../../../assets/imgs/add-step-icon.svg">
+          ADD TASK
+        </div>
+      </div>
+
+      </div>
+
+      
+  
+    </div>
+  
+  </div>
+  

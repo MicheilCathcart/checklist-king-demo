@@ -1,0 +1,49 @@
+<div class="wrapper">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+      <div class="push"></div>
+      <app-make-payment *ngIf="userCount > 1" [coupon]="coupon" [userCount]="userCount" [oldUserCount]="oldUserCount" [subscribed]="user?.subscribed"></app-make-payment>
+  </div>
+
+  <div class="content">
+    <h1>PLANS</h1>
+
+    <!-- Coupon Code -->
+    <label>Coupon Code</label>
+    <div class="input-wrap">
+      <input 
+        type="text" 
+        [(ngModel)]="couponCode"
+        (ngModelChange)="checkAndApplyCode($event)"
+        placeholder="Enter Coupon Code"
+        name="couponCode" 
+      />
+      <img *ngIf="validCode" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+      <small *ngIf="!validCode && couponCode">Invalid Coupon Code</small>
+    </div>
+    
+    <h3>${{ coupon ? 20 * coupon?.percentage : 20 }} per 10 users</h3>
+
+    <div class="link-group">
+
+        <div class="link-header">Current Plan</div>
+        <div class="link checkbox checked">
+            <span *ngIf="oldUserCount === 1">1 user (Trial plan)</span>
+          <span *ngIf="oldUserCount > 1">{{ oldUserCount }} users</span>
+        </div>
+
+    </div>
+
+    <div class="link-group">
+    
+      <div class="link-header">Change Plan</div>
+      <div class="link checkbox" (click)="selectPlan(plan)" *ngFor="let plan of planOptions" [ngClass]="{ 'checked': isSelected(plan) }">
+          <span *ngIf="plan === 1">1 user (Trial plan)</span>
+        <span *ngIf="plan > 1">{{ plan }} users</span>
+      </div>
+    </div>
+
+  </div>
+
+</div>

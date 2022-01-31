@@ -1,0 +1,83 @@
+<div class="wrapper">
+
+    <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/back-arrow.svg" /></div>
+      <div class="push"></div>
+      <button class="header-button" (click)="signUp()" [disabled]="signInForm.invalid">SIGN UP</button>
+    </div>
+  
+    <div class="content">
+
+        <h2>New User</h2>
+
+        <div ngForm #signInForm="ngForm">
+
+          <!-- Your Name -->
+          <label>Your Name</label>
+          <div class="input-wrap">
+            <input 
+              type="text" 
+              [(ngModel)]="name"
+              placeholder="Your Name" 
+              name="name" 
+              #nameRef="ngModel"
+              required
+            />
+            <img *ngIf="nameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+            <small *ngIf="nameRef.invalid && nameRef.touched">Required</small>
+          </div>
+
+          <!-- Team Name -->
+          <label>Organisation/Team Name</label>
+          <div class="input-wrap">
+            <input 
+              type="text" 
+              [(ngModel)]="teamName"
+              placeholder="Your Organisation/Team Name" 
+              name="teamName" 
+              #teamNameRef="ngModel"
+              required
+            />
+            <img *ngIf="teamNameRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+            <small *ngIf="teamNameRef.invalid && teamNameRef.touched">Required</small>
+          </div>
+
+          <!-- Password -->
+          <label>Choose Password</label>
+          <div class="input-wrap">
+            <input 
+              type="password" 
+              [(ngModel)]="password"
+              placeholder="Password, 8 characters or more" 
+              name="password" 
+              #passwordRef="ngModel"
+              required
+              minlength="8"
+              validateEqual="confirmPassword" reverse="true"
+            />
+            <img *ngIf="passwordRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+            <small *ngIf="passwordRef.invalid && passwordRef.touched">Must be min 8 characters long</small>
+          </div>
+
+          <!-- Confirm Password -->
+          <label>Confirm Password</label>
+          <div class="input-wrap">
+            <input 
+              type="password" 
+              [(ngModel)]="confirmPassword"
+              placeholder="Confirm Password" 
+              name="confirmPassword" 
+              #confirmPasswordRef="ngModel"
+              required
+              validateEqual="password"
+            />
+            <img *ngIf="confirmPasswordRef.valid" class="process-tick" src="./assets/imgs/checklist-tick.svg" />
+            <small *ngIf="confirmPasswordRef.invalid && confirmPasswordRef.touched">Password mismatch</small>
+          </div>
+
+        </div>
+  
+    </div>
+  
+  </div>
+  

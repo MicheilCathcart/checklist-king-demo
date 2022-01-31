@@ -1,0 +1,33 @@
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/back-arrow.svg" /></div>
+    <div class="push"></div>
+    <button class="header-button secondary" (click)="deleteInProgress()"><img src="./../../../assets/imgs/delete.svg" /></button>
+    <button class="header-button" (click)="finish()">FINISH</button>
+  </div>
+
+  <div class="content">
+
+    <app-loading-image [title]="true" *ngIf="!(inProgressQuery | async)?.name"></app-loading-image>
+
+      <ng-container *ngIf="(inProgressQuery | async)?.name">
+    <h1>
+      <div>{{ (inProgressQuery | async)?.name }}</div>
+      <small class="address">{{ (inProgressQuery | async)?.clientName  }} - {{ (inProgressQuery | async)?.address }}</small>
+    </h1>
+
+    <div class="link-group" *ngFor="let group of (inProgressQuery | async)?.checklist; let groupIndex = index;">
+      
+      <div class="link-header">{{ group.groupName }}</div>
+      <div class="link checkbox" 
+      *ngFor="let step of group.tasks; let stepIndex = index;"
+      (click)="check(step, groupIndex, stepIndex)" 
+      [ngClass]="{'checked': step.state }">{{ step.description }}</div>
+    </div>
+
+      </ng-container>
+
+  </div>
+
+</div>

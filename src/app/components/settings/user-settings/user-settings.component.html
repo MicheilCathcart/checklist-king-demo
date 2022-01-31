@@ -1,0 +1,38 @@
+<div class="wrapper">
+
+  <div class="header">
+      <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/exit-cross.svg" /></div>
+    <div class="push"></div>
+    <button class="header-button" *ngIf="userCount < paidUserCount" (click)="add()">+ NEW</button>
+    
+  </div>
+
+  <div class="content">
+      <h1>
+          <div>USERS</div>
+          <small>Invite new users to your team</small>
+        </h1>
+
+    <app-loading-image *ngIf="!userCount"></app-loading-image>
+
+    <ng-container *ngIf="userCount">
+
+    <button class="body-button" *ngIf="userCount >= paidUserCount" (click)="upgradePlan()">+ UPGRADE PLAN TO ADD MORE USERS</button>
+
+    <app-loading-image *ngIf="!(users.query | async) && !paidUserCount"></app-loading-image>
+
+    <div class="link-group" *ngFor="let group of users.query | async">
+      
+      <div class="link-header">{{ group[0].role }}</div>
+      <div class="link" (click)="initialiseUser(user)" *ngFor="let user of group">{{ user.name }}</div>
+    </div>
+
+    <div class="info-message">
+      <p>Add new users using the <strong>+ NEW</strong> button to invite them to your team</p>
+    </div>
+
+    </ng-container>
+
+  </div>
+
+</div>

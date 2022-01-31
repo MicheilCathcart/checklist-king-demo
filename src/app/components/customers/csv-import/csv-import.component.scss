@@ -1,0 +1,37 @@
+:host {
+
+    flex:1 1 auto;
+    min-height: 0; height: 100%;
+
+    .import-button {
+        padding: 12px;
+        border-radius: 4px;
+        margin-top: 10px;
+        background-color: #04a4d0;
+        color: white;
+    }
+
+    table {
+        max-height: 600px;
+        overflow-y: scroll;
+        display: block;
+    }
+
+    table thead tr th {
+        border-bottom: 1px solid rgba(255,255,255,0.5);
+        padding: 9px;
+        text-align: left;
+        border-spacing: 0px;
+    }
+
+    table tbody tr td {
+        border-bottom: 1px solid rgba(255,255,255,0.7);
+        padding: 9px;
+        text-align: left;
+        border-spacing: 0px;
+    }
+
+    table {
+        border-spacing: 0px;
+    }
+}

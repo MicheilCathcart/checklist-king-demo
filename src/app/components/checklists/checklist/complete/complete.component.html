@@ -1,0 +1,47 @@
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-button-back" (click)="back()"><img class="back-arrow" src="./../../../assets/imgs/back-arrow.svg" /></div>
+    <div class="push"></div>
+    <button class="header-button" (click)="sendReport()">SEND REPORT</button>
+  </div>
+
+  <div class="content">
+
+
+    <app-loading-image [title]="true" *ngIf="!(inProgressQuery | async)?.name"></app-loading-image>
+
+    <ng-container *ngIf="(inProgressQuery | async)?.name">
+
+    <h1>
+      <div>{{ (inProgressQuery | async)?.name }}</div>
+      <small class="address">{{ (inProgressQuery | async)?.clientName  }} - {{ (inProgressQuery | async)?.address }}</small>
+    </h1>
+
+    <!-- Summary -->
+    <div class="link-group">
+      <div class="link-header">COMPLETED {{ report.completionTime | date: 'EEE d MMM'}}</div>
+      <div class="link checkbox" *ngFor="let area of summary" 
+      [ngClass]="{'checked': area.stepsCompleted === area.totalSteps, 'partial': area.stepsCompleted < area.totalSteps}">
+          <b>{{ area.areaName }}</b><br>
+          {{ area.stepsCompleted }}/{{ area.totalSteps }} Steps Completed
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <label>Notes</label>
+    <div class="input-wrap">
+      <div class="placeholder" *ngIf="report.notes.length === 0">Enter Notes</div>
+      <div contenteditable="true" 
+      name="report"
+            class="step-input" 
+            style="max-width: 100%"
+            [(ngModel)]="report.notes"
+      ></div>
+    </div>
+
+    </ng-container>
+
+  </div>
+
+</div>

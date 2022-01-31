@@ -1,0 +1,30 @@
+<div class="wrapper">
+
+    <div class="header">
+      <app-team-name></app-team-name>
+      <div class="push"></div>
+    </div>
+  
+    <div class="content">
+        <h1>
+            <div>SETTINGS</div>
+            <small>Team and user settings</small>
+          </h1>
+  
+      <div class="link-group">
+        <div class="link-header">Team Settings</div>
+        <div *authCheck class="link" (click)="goToGeneralSettings()">General</div>
+        <div *authCheck class="link" (click)="goToUserSettings()">Users</div>
+        <div *authCheck class="link" (click)="goToPlanSettings()">Plans</div>
+        <div class="link" (click)="logout()">Logout</div>
+        <div class="link" (click)="resetPassword()">Send Reset Password Email</div>
+      </div>
+
+      <div *authCheck  class="info-message">
+        <p>Here you can add and remove users from your team, change the report email styles and communication settings</p>
+      </div>
+  
+    </div>
+  
+  </div>
+  
